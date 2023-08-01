@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function myFunction() {
+            var x = document.getElementById("num").value;
+            if(x%2==0)
+                alert(x +"is even")
+            else
+            alert(x + "is odd")
+        }
+
+
+    </script>
+</head>
+<body>
+    <form>
+        <input type = "number" id = "num">
+        <input type = "submit" value = "Submit" onclick = "myFunction()">
+    </form>
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Articles</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <div class="row">
+        <% articles.forEach(function(article) { %>
+        <div class="col-md-4">
+          <div class="card" style="width: 100%">
+            <% if (article.urlToImage) { %>
+            <img
+              src="<%= article.urlToImage %>"
+              class="card-img-top"
+              alt="Image"
+            />
+            <% } else { %>
+            <img
+              src="https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg?20200913095930"
+              class="card-img-top"
+              alt="Image"
+            />
+
+            <% } %>
+            <div class="card-body">
+              <% if (article.title) { %>
+              <h5 class="card-title">
+                <a href="<%= article.url %>"><%= article.title %></a>
+              </h5>
+              <% } %> <% if (article.description) { %>
+              <p class="card-text"><%= article.description %></p>
+              <% } %> <% if (article.author) { %>
+              <p class="card-text">
+                <strong>Author:</strong>
+                <a href="<%= article.author %>">Author</a>
+              </p>
+              <% } %> <% if (article.publishedAt) { %>
+              <p class="card-text">
+                <strong>Published:</strong> <%= formatDate(article.publishedAt)
+                %>
+              </p>
+              <% } %>
+
+              <a href="<%= article.url %>" class="btn btn-primary">Read more</a>
+            </div>
+          </div>
+        </div>
+        <% }) %>
+      </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  </body>
+</html>

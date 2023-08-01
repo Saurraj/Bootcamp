@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ToDo List</title>
+  </head>
+
+  <body>
+    <h1>ToDo List</h1>
+
+    <ul>
+      <% data.forEach(todo=> { %>
+      <li>
+        <span> <%= todo.todoTask %> </span>
+        <form action="/delete" method="post">
+          <input type="hidden" name="todoId" value="<%= todo.todoId %>" />
+          <button type="submit">Delete</button>
+        </form>
+      </li>
+      <% }) %>
+    </ul>
+    <% if (data.length > 0) { %>
+    <!-- JavaScript to fetch the last item -->
+    <script>
+      // Get the last item from the ToDo list
+      var lastItem = "<%= data[data.length - 1].todoTask %>";
+
+      // Add the last item to the "Thanks for adding" message
+      var thanksMessage =
+        "Thanks for adding '" + lastItem + "' to the ToDo list!";
+
+      // Create a new paragraph element and set the message as its text content
+      var paragraph = document.createElement("p");
+      paragraph.textContent = thanksMessage;
+
+      // Append the paragraph to the body
+      document.body.appendChild(paragraph);
+    </script>
+    <% } else { %>
+    <!-- JavaScript to display a generic "Thanks for adding" message -->
+    <script>
+      // Create a new paragraph element and set the generic message as its text content
+      var paragraph = document.createElement("p");
+      paragraph.textContent = "Thanks for adding a new task to the ToDo list!";
+
+      // Append the paragraph to the body
+      document.body.appendChild(paragraph);
+    </script>
+    <% } %>
+
+    <h2>Add New ToDo</h2>
+    <form action="/view" method="post">
+      <input
+        id="myInput"
+        type="text"
+        name="todoTask"
+        placeholder="Enter a new ToDo task"
+        required
+      />
+      <button type="submit">Add</button>
+    </form>
+  </body>
+</html>

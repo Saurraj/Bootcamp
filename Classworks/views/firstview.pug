@@ -1,0 +1,9 @@
+html
+   head
+      title Simple template
+   body
+      if(user)
+         h1 Hi, #{user.name}
+         p age is, #{user.age}
+      else
+         a(href = "/sign_up") Sign Up
