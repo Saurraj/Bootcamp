@@ -30,16 +30,6 @@ axios
   .get(apiUrl, requestOptions)
   .then((response) => {
     articles = response.data.articles;
-
-    // articles.forEach((article, index) => {
-    //   console.log(`#${index + 1}`);
-    //   console.log("Title:", article.title);
-    //   console.log("Description:", article.description);
-    //   console.log("URL:", article.url);
-    //   console.log("Published At:", article.publishedAt);
-    //   console.log("Source:", article.source.name);
-    //   console.log("----------------------");
-    // });
   })
   .catch((error) => {
     console.error("Error fetching news:", error.message);
