@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Todo App</title>
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css"
+    />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="container-fluid">
+        <span class="navbar-brand mb-0 h1">Todo App</span>
+        <div class="navbar-nav ml-auto">
+          <% if (user) { %>
+          <span class="navbar-text">Welcome, <%= user.username %>!</span>
+          <a class="btn btn-primary ml-2" href="/auth/logout">Logout</a>
+          <% } else { %>
+          <a class="btn btn-primary" href="/auth/login">Login</a>
+          <a class="btn btn-secondary ml-2" href="/auth/signup">Signup</a>
+          <% } %>
+        </div>
+      </div>
+    </nav>
+    <div class="container mt-5">
+      <div class="row justify-content-center">
+        <div class="col-md-8">
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">Todo List</h3>
+            </div>
+            <div class="card-body">
+              <% if (error) { %>
+              <div class="alert alert-danger" role="alert"><%= error %></div>
+              <% } %>
+              <form action="/todo/add" method="post">
+                <div class="input-group mb-3">
+                  <input
+                    type="text"
+                    name="todoText"
+                    class="form-control"
+                    placeholder="Enter a new task..."
+                    required
+                  />
+                  <button type="submit" class="btn btn-primary">
+                    Add Task
+                  </button>
+                </div>
+              </form>
+              <ul class="list-group">
+                <% todoItems.forEach(todo => { %>
+                <li class="list-group-item">
+                  <%= todo.text %> <% if (todo.is_completed) { %> &#x2713; <% }
+                  %>
+                  <div class="float-end">
+                    <form
+                      class="d-inline"
+                      action="/todo/update/<%= todo.id %>"
+                      method="post"
+                    >
+                      <input
+                        type="text"
+                        name="todoText"
+                        class="form-control"
+                        value="<%= todo.text %>"
+                        required
+                      />
+                      <button type="submit" class="btn btn-sm btn-primary mt-2">
+                        Update
+                      </button>
+                    </form>
+                    <form
+                      class="d-inline"
+                      action="/todo/delete/<%= todo.id %>"
+                      method="post"
+                    >
+                      <button type="submit" class="btn btn-sm btn-danger mt-2">
+                        Delete
+                      </button>
+                    </form>
+                    <form
+                      class="d-inline"
+                      action="/todo/complete/<%= todo.id %>"
+                      method="post"
+                    >
+                      <input
+                        type="hidden"
+                        name="isCompleted"
+                        value="<%= todo.is_completed %>"
+                      />
+                      <button type="submit" class="btn btn-sm btn-success mt-2">
+                        <% if (todo.is_completed) { %> Unmark <% } else { %>
+                        Mark Complete <% } %>
+                      </button>
+                    </form>
+                  </div>
+                </li>
+                <% }) %>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

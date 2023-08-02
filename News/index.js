@@ -1,5 +1,6 @@
 const express = require("express");
 const bodyParser = require("body-parser");
+require("dotenv").config();
 
 const path = require("path");
 
@@ -12,10 +13,9 @@ app.set("view engine", "ejs");
 app.set("views", path.join(__dirname + "/views"));
 
 const axios = require("axios");
-
-const apiKey = "0175fca54aed4d4dad4df436ca33b072";
+const apiKey = "0175fca54aed44d4dad4df436ca33b072";
 const apiUrl = "http://newsapi.org/v2/top-headlines";
-var category = "general"; // Change this to your desired country code
+var category = "general";
 const pageSize = 12; // Number of news articles to fetch
 const country = "in";
 const language = "en";
